@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://api-albergue-mvp.onrender.com'
+const API_URL = import.meta.env.VITE_API_URL || (
+  typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://api-albergue-mvp.onrender.com'
+)
 
 async function apiRequest(path, options = {}) {
   const response = await fetch(`${API_URL}${path}`, {
